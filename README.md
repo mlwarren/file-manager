@@ -39,5 +39,6 @@ Swagger API Docs: http://localhost:8080/v2/api-docs
 Spring Boot Actuator: http://localhost:8080/actuator
 
 Swagger PDF Docs Available [here](https://github.com/mlwarren/file-manager/blob/master/src/main/resources/FileManagerSwaggerDocs.pdf)
-####(Docker build coming soon)
+
+#### (Docker build coming soon)
 
