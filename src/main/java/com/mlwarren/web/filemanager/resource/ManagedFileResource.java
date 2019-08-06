@@ -133,4 +133,25 @@ public class ManagedFileResource {
         //Update database with managed file information
         return mf;
     }
+
+    @DeleteMapping("/users/{id}/files/{fid}")
+    public Resource<ManagedFile> deleteFile(@PathVariable Integer id, @PathVariable Integer fid){
+        Optional<ManagedFile> optMf = managedFileRepository.findById(fid);
+        if (!optMf.isPresent())
+            throw new FileDetailsNotFoundException("Managed file not found");
+
+        ManagedFile mf = optMf.get();
+        String fileName = mf.getFileName();
+
+        managedFileService.deleteFileFromDisk(fileName);
+        managedFileRepository.delete(mf);
+
+        Resource<ManagedFile> resource = new Resource<ManagedFile>(mf);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllFileDetailsForUser(id));
+
+        resource.add(linkTo.withRel("all-file-details-for-user"));
+
+        return resource;
+
+    }
 }

@@ -60,4 +60,15 @@ public class ManagedFileService {
             throw new FileStorageException("File not found: " + fileName);
         }
     }
+
+    public String deleteFileFromDisk(String fileName){
+        try {
+            Path filePath = Paths.get(UPLOAD_DIR).resolve(fileName).normalize();
+            Files.delete(filePath);
+            return filePath.toUri().toString();
+        }
+        catch(IOException ex){
+            throw new FileStorageException("File not found: " + fileName);
+        }
+    }
 }
