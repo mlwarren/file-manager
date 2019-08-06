@@ -88,6 +88,12 @@ public class ManagedFileResource {
         org.springframework.core.io.Resource resource =
                 managedFileService.loadFileAsResourceFromDisk(mf.getFileName());
 
+        //Update download count and save update to db
+        Integer downloadCount = mf.getDownloadCount();
+        downloadCount++;
+        mf.setDownloadCount(downloadCount);
+        managedFileRepository.save(mf);
+
         //Attempt to determine file content type
         String contentType = null;
         try {

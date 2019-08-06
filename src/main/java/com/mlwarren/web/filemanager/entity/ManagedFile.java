@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Data
 public class ManagedFile {
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
